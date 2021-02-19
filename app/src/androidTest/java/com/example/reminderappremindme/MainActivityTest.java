@@ -43,6 +43,7 @@ public class MainActivityTest {
     public void onCreate() {
     }
 
+    // test when the floating action button is pressed (+) signed button on the bottom right corner
     @Test
     public void FAbtnClick(){
         onView(withId(R.id.FAbtn)).perform(click());
@@ -50,6 +51,7 @@ public class MainActivityTest {
         onView(withText("Add")).perform(click());
     }
 
+    // test to press abort when the dialog appeared
     @Test
     public void FAbtnAbort(){
         onView(withId(R.id.FAbtn)).perform(click());
@@ -57,6 +59,7 @@ public class MainActivityTest {
         onView(withText("Abort")).perform(click());
     }
 
+    // test to delete task on the list view
     @Test public void TrashTest(){
         onView(withId(R.id.delID)).perform(click());
     }

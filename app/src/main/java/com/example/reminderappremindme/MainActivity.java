@@ -1,6 +1,5 @@
 package com.example.reminderappremindme;
 
-import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Notification;
@@ -41,11 +40,17 @@ import static java.util.Calendar.MINUTE;
 public class MainActivity extends AppCompatActivity {
 
     public static final String NC_ID = "10001";
+
     private final static String default_notif_ID = "default";
+
     private static final String TAG = "MainActivity";
+
     private com.example.reminderappremindme.DBhelp dbhelp;
+
     private ListView listView;
+
     private FloatingActionButton FAbtn;
+
     private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.3F);
 
     // set main page
@@ -60,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
         produceListView();
         FAbtnClicked();
-        FAbtnHide();
     }
 
     // set notification
@@ -113,23 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // hide the button
-    private void FAbtnHide() {
-        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if (scrollState == SCROLL_STATE_IDLE) {
-                    FAbtn.show();
-                }else{
-                    FAbtn.hide();
-                }
-            }
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-            }
-        });
-    }
-
     private void FAbtnClicked() {
         FAbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,10 +127,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void showDialog() {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getLayoutInflater().getContext());
+        AlertDialog.Builder bobBuildsDialog = new AlertDialog.Builder(getLayoutInflater().getContext());
         LayoutInflater lif = this.getLayoutInflater();
         final View dialogView = lif.inflate(R.layout.dialog, null);
-        dialogBuilder.setView(dialogView);
+        bobBuildsDialog.setView(dialogView);
 
         final EditText titleED = dialogView.findViewById(R.id.edit_title);
         final TextView dateED = dialogView.findViewById(R.id.date);
@@ -211,8 +198,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        dialogBuilder.setTitle("Create New Task");
-        dialogBuilder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        bobBuildsDialog.setTitle("Create New Task");
+        bobBuildsDialog.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String title = titleED.getText().toString();
                 String date = dateED.getText().toString();
@@ -225,12 +212,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        dialogBuilder.setNegativeButton("Abort", new DialogInterface.OnClickListener() {
+        bobBuildsDialog.setNegativeButton("Abort", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.cancel();
             }
         });
-        AlertDialog alertDialog = dialogBuilder.create();
+        AlertDialog alertDialog = bobBuildsDialog.create();
         alertDialog.show();
     }
 
