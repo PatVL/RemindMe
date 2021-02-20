@@ -1,11 +1,10 @@
 package com.example.reminderappremindme;
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
 
 import java.util.ArrayList;
 
@@ -13,7 +12,7 @@ public class DBhelp extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
 
-    private static final String TABLE_NAME = "ToDo_Table";
+    private static final String TABLE_NAME = "TableData";
     private static final String COL1 = "ID";
     private static final String COL2 = "Name";
     private static final String COL3 = "Date";
@@ -26,7 +25,6 @@ public class DBhelp extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + "("                + COL1 + " integer primary key, "                + COL2 + " TEXT, "                + COL3 + " DATE, "                + COL4 + " TIME" + ")";
-        Log.d(TAG, "Creating table " + createTable);
         db.execSQL(createTable);
     }
 
@@ -36,31 +34,29 @@ public class DBhelp extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    //Memasukkan data ke database
+    // input data to db
     public boolean inputData(String item, String date, String time) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL2, item);
-        contentValues.put(COL3, date);
-        contentValues.put(COL4, time);
-        Log.d(TAG, "insertData: Inserting " + item + " to " + TABLE_NAME);
-        long result = db.insert(TABLE_NAME, null, contentValues);
+        ContentValues cv = new ContentValues();
+        cv.put(COL2, item);
+        cv.put(COL3, date);
+        cv.put(COL4, time);
+        long result = db.insert(TABLE_NAME, null, cv);
         db.close();
         return result != -1;
     }
 
-    //Menghapus data dari database
+    // delete data from db
     void delData(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, COL1 + "=" + id, null);
     }
 
-    //Memuat semua data ke listview
+    // load all data to db
     public ArrayList<Datas> takeData() {
         ArrayList<Datas> arrayList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME;
-        @SuppressLint("Recycle")
         Cursor cursor = db.rawQuery(query, null);
 
         while (cursor.moveToNext()) {

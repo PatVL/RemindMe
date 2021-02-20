@@ -49,7 +49,6 @@ public class Items extends BaseAdapter {
         final ImageView delIV = convertView.findViewById(R.id.delID);
         delIV.setTag(position);
 
-
         delIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +80,6 @@ public class Items extends BaseAdapter {
 
     private void toastMsg(String message) {
         Toast toast = Toast.makeText(c, message, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER,0,0);
         toast.show();
     }
 }
